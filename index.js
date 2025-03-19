@@ -1,12 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-import dotenv from "dotenv";
-dotenv.config();
 
 import orderController from "./controllers/orderController"
+import productController from "./controllers/productController"
+import userController from "./controllers/userController"
 
 const app = express();
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -22,6 +23,7 @@ database.once("connected", () => {
 });
 
 app.use('/', orderController)
+app.use('/products/', productController)
+app.use('/user/', userController)
 
-const PORT = process.env.PORT || 3020;
-app.listen(PORT, () => console.log(`server running on port ${PORT}`));
+app.listen(3020, () => console.log(`server running on port 3020`));
